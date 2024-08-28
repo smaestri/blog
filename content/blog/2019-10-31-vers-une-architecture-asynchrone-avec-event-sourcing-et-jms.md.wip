@@ -1,0 +1,87 @@
+---
+title: Vers une architecture asynchrone avec Event Sourcing et JMS
+author: sylvain
+type: post
+date: 2019-10-31T21:49:40+00:00
+url: /index.php/2019/10/31/vers-une-architecture-asynchrone-avec-event-sourcing-et-jms/
+categories:
+  - Backend
+tags:
+  - asynchrone
+  - event-sourcing
+  - jms
+  - microservice
+
+---
+Nous allons voir dans ce post les inconvénients d'avoir une architecture 100% synchrone, et en quoi l'asynchrone a de multiples avantages, à travers un exemple concret que j'ai pu mettre en œuvre dans le service fidélité d'un grand groupe hotellier.
+
+Ce sera l'occasion de parler Event Sourcing, JMS et j'en passe! Bref, un post riche, alors acccrochez-vous bien!
+
+### Inconvénients de reposer sur une architecture synchrone
+
+Lors de la mise en place d'une application complexe, si on se repose uniquement sur des WebServices synchrones (par exemple REST), on peut connaître pas mal de désagréments : 
+
+  * si un appel plante, alors toutes la chaîne plante ;
+  * pas de possibilité de reprise sur erreur
+
+Nous allons voir en quoi une architecture asynchrone permet de pallier aux deux points ci-dessus, à travers un exemple concret, vécu dans un grand groupe hotellier français dont je tairais le nom 😉
+
+### Exemple concret de mise en place d'une architecture asynchrone 
+
+Les communications par message, par exemple JMS pour JAVA, permettent la mise en place d'architecture asynchrone. Nous ne parlerons pas de Kafka, qui permet aussi également la mise en place d'une architecture asynchrone mais selon un mécanisme différent basé sur des logs distribués et persistant. 
+
+Le besoin est le suivant : dans un contexte de fidélisation d'une grande entreprise hôtelière, lorsqu'un membre passe un certain statut (gold par exemple) il a la possibilité de donner un statut supérieur à un proche.
+
+Nous avons un existant dans un monolithe où sont présents toutes les règles de calcul de point et d'upgrade des membres. 
+
+Pour ce besoin, nous souhaitons :
+
+  * ajouter cette nouvelle fonctionnalité dans une brique à part (microservice) pour ne pas encore accroître le monolithe;
+  * reposer sur une architecture asynchrone afin d'avoir de la robustesse, et de la reprise sur erreur (nous verrons comment)
+
+### Conception technique
+
+Plutôt que de partir sur une architecture synchrone pouvant se révéler dangereuse pour les points vus ci-dessus, nous allons partir sur de l'asynchrone. Nous allons décomposer la fonctionnalité en deux use-cases:
+
+  * quand le membre passe gold, alors il obtient la faculté de donner un statut;
+  * il peut ensuite donner le statut au membre qu'il désire
+
+
+
+#### 1 / Obtention d'un don de statut lorsque le membre passe GOLD<figure class="wp-block-image">
+
+![][1] </figure> 
+
+**Explications du diagramme de séquence**
+
+Chaque élément vertical représente une application Java autonome, basée sur Spring Boot dernière version / JAVA 8 (sauf pour le monolithe, où bien entendu les technologies sont plus anciennes)
+
+  * Événement _memberUpgraded_ lors d'un upgrade de membre (lorsqu'il a accumulé suffisamment de points par exemple), stocké dans une nouvelle table. Comme vous l'aurez deviné, on va s'intéresser au membre qui passe _gold_ pour notre besoin;
+  * Mise en place d'un batch (_upgrade-batch_) qui écoute cette table d'événement, et qui publie un message dans un topic JMS _upgrade-topic_;
+  * Nouveau microservice _ms-don_ qui écoute ce topic JMS, et qui crée le don de statut lorsque le nouveau membre est _GOLD_, dans une table spécifique et locale au microservice (car pour rappel, dans une architecture à base de microservices, chaque microservice possède sa propre base de données). Le don est au statut CREATED.
+
+#### 2 / Effectuer le DON<figure class="wp-block-image">
+
+![][2] </figure> 
+
+**Explications du diagramme de séquence**
+
+  * Appel WS _donate_ via Service REST, avec en paramètre les identifiants du donneur et bénéficiaire; ce WS va simplement insérer un nouvel événement StatusGiftCreated au statut PENDING, dans une table spéciale (encore de l'Event Sourcing!). Ainsi, l'appel au WS est quasi instantané car il n'a quasiment rien à traiter. De plus, on peut bien constater l'historique des dons effectués, et on peut même reconstruire l'état pour un membre donné à partir de tous ces événements grâce à l'Event sourcing.
+  * Mise en place d'un CRON (interne au Microservice, mais aurait pu être externalisé pour une plus grande modularité et robustesse) qui écoute cette table d'événement afin d'effectuer plusieurs actions pour chacun d'eux (de façon transactionnelle):
+      1. Appel service du monolithe pour upgrader le bénéficiaire;
+      2. Envoi d'un email au donneur et bénéficiaire;
+      3. Mise à jour du don au statut CONSUMED
+
+De plus, au cas où une de ces 2 actions se passe mal (timeout, coupure réseau, &#8230;), on va va pouvoir faire de la reprise sur erreur, ce qui est un atout additionnel à la mise en place d'une architecture asynchrone.
+
+Imaginons un instant ce qu'aurait été l'architecture en mode synchrone et sans microservice :<figure class="wp-block-image">
+
+![][3] </figure> 
+
+Au delà de l'accroissement du monolithe, nous ne profitons pas de la reprise sur erreur, et les performances sont considérablement dégradées car tout est fait est dans un seul WS!
+
+J'espère que ce post vous aura fait prendre conscience des avantages indéniables à faire de l'asynchrone. Nous verrons dans un futur post en quoi Kafka permet de garder ce fonctionnement, et les avantages de l'asynchrone, tout en simplifiant les choses!
+
+ [1]: https://www.websequencediagrams.com/cgi-bin/cdraw?lz=dGl0bGUgT2J0ZW50aW9uIGQndW4gZG9uIGRlIHN0YXR1dAoKTW9ub2xpdGhlLT4AAgk6IDxNZW1iZXJVcGdyYWRlZD4gc2F1dmVnYXJkw6kgZGFucyB0YWJsZSBkJ2V2ZW50Cgp1cGdhZGUtYmF0Y2gAPQ1FY291dGUAIA8AIA51AGAGLXRvcGljOiBFbnZvaSBNZXNzYWdlIEpNUwptcy1kb24AFxIAVgUAFQkAIAYgOiBTaSBNZW1icmUgR09MRCA6IENyw6lhAIF8BnUgZG9uCgoK&s=magazine
+ [2]: https://www.websequencediagrams.com/cgi-bin/cdraw?lz=dGl0bGUgRWZmZWN0dWVyIGxlIGRvbgoKd2ViIHVzZXItPm1zLWRvbjogQXBwZWwgV1MgUkVTVCBkb25hdGUKABcGABsKPFN0YXR1c0dpZnRDcmVhdGVkPiBldmVudCBhdSBzdGF0dXQgUEVORElORwAzCQBjCDogcmV0b3VyIFdTAEYSQ1JPTj4gZWNvdXRlAEMPcwBBEW1vbm9saXRoZToAgScJdXBncmFkZSBCw6luw6lmaWNpYWlyZQoAIQkAgV4KAH4HT0sAMxxFbnZvaSBFbWFpbAAdJwCCPwdNaXNlIMOgIGpvdXIgZHUgZG9uAIIQC0NPTlNVTUVEAIJHEVNpIMOpY2hlYyByZXByb2R1aXQgYXBwZWxzIGNpLWRlc3N1cyBqdXNxdSfDoCAzIGZvaXMKCgoKCg&s=magazine
+ [3]: https://www.websequencediagrams.com/cgi-bin/cdraw?lz=dGl0bGUgTGUgdG91dCBlbiBtb2RlIHN5bmNocm9uZQoKTW9ub2xpdGhlLT4AAgk6IE1lbWJyZSBwYXNzZSBnb2xkABEXSW5zZXJ0aW9uIHN0YXR1cyBnaWZ0CndlYi11c2VyAEYNV1MgUkVTVCBkb25hdGUAYBhpc2Ugw6Agam91ciBkdSBkb24gYXUAVQhjb25zdW1lAHUYVXBncmFkZSBkdSBiw6luw6lmaWNpYWlyAFUYRW52b2kgZHUgbWFpbACBfQwAgTgIOiBSZXRvdXIgT0svS08vVGltZW91dAoKbm90ZSBvdmVyIACCKAtzaSB1biBzZXVsIGRlIGNlcyBhcHBlbHMgw6ljaG91ZSwgYWxvcnMAgwQFZSBsYSBwaWxlABUIIQA-FlBhcyBkZSByZXByaXNlIHN1ciBlcnJldXIgcG9zc2libGUgKG91IGRpZmZpY2lsZW1lbnQhKQoKCg&s=magazine
