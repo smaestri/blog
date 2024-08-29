@@ -1,27 +1,18 @@
-import React from "react"
+import * as React from "react"
 import { Link, graphql } from "gatsby"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
-import SEO from "../components/seo"
-import { Disqus } from 'gatsby-plugin-disqus';
+import Seo from "../components/seo"
 
-const BlogPostTemplate = ({ data, location }) => {
- 
-  const post = data.markdownRemark
-  const siteTitle = data.site.siteMetadata?.title || `Title`
-  const description = data.site.siteMetadata?.description || `Description`
-  const { previous, next } = data
-
-console.log('location')
-console.log(location)
+const BlogPostTemplate = ({
+  data: { previous, next, site, markdownRemark: post },
+  location,
+}) => {
+  const siteTitle = site.siteMetadata?.title || `Title`
 
   return (
-    <Layout location={location} title={siteTitle} description={description}>
-      <SEO
-        title={post.frontmatter.title}
-        description={post.frontmatter.description || post.excerpt}
-      />
+    <Layout location={location} title={siteTitle}>
       <article
         className="blog-post"
         itemScope
@@ -66,18 +57,16 @@ console.log(location)
           </li>
         </ul>
       </nav>
-
-      <Disqus
-        config={{
-            /* Replace PAGE_URL with your post's canonical URL variable */
-            url: location.href,
-            /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
-            identifier: post.id,
-            /* Replace PAGE_TITLE with the title of the page */
-            title: post.frontmatter.title,
-        }}
-    />
     </Layout>
+  )
+}
+
+export const Head = ({ data: { markdownRemark: post } }) => {
+  return (
+    <Seo
+      title={post.frontmatter.title}
+      description={post.frontmatter.description || post.excerpt}
+    />
   )
 }
 
