@@ -9,20 +9,25 @@ categories:
 ---
 ## Introduction
 
-Nous allons découvrir dans ce POST la stack technique utilisée pour publier mes posts sur le bloq que vous êtes en train de visiter. Pour résumer:
+Nous allons découvrir dans ce POST la stack technique utilisée pour publier mes posts sur le blog que vous êtes en train de visiter. Pour résumer:
 - Framework: Gatsby
 - Hosting: GitHub Pages / Github Actions
+- Gestion de comentaires: Disqus
+- Monitoring: Google Analytics
 
 ## Framework: Gatsby 
 
 Voici les critères sur lesquels je me suis basé pour sélectionner ce framework :
 - Un site "statique", génére par un SSG (consultez [ce très bon article](https://www.robinwieruch.de/web-applications/) qui explique l'historique de développement WEB, et les termes *SPA - Single Page Application*, *SSR - Server Side Rendering*, ou *SSG - Static Site Generator*), afin d'avoir un site rapide, et facile à deployer (par exemple dans *github pages* ou *gitlab pages*)
 - Ayant de l'expérience avec REACT, j'ai voulu utiliser ce framework afin d'êtrer rapidement opérationnel
-- Je souhaite que le framework soit performant pour afficher les pages très rapidement (avec un SSG justement, c'est normalement le cas :))
+- Je souhaite que le framework soit performant pour afficher les pages très rapidement (avec un SSG justement, c'est normalement le cas :));
+- Pouvoir écrire mes posts en markdown (syntaxe très répandue) : il faut donc un mécanisme qui transforme le markdown en HTML;
 - Enfin un bon éco système de plugins, et une bonne documentation, car je souhaite ajouter des plugins dans le futur (Analyse de l'utilisation, Système commentaires, etc.)
 - Le framework doit aussi proposer un joli template de blog
 
-Un framework en particulier s'est dégagé et remplit tous ces critères (bien que d'autres auraient été possibles, j'en conviens) : Gatsby JS ! [Le template proposé](https://www.gatsbyjs.com/starters/gatsbyjs/gatsby-starter-blog) et prêt à l'emploi, me plait tout particulièrement: sobre, efficace. En plus Gatsby utilise graphQL et je voulais monter en compétences sur cette techno!
+Un framework en particulier s'est dégagé et remplit tous ces critères (bien que d'autres auraient été possibles, j'en conviens) : Gatsby JS ! [Le template proposé](https://www.gatsbyjs.com/starters/gatsbyjs/gatsby-starter-blog) et prêt à l'emploi, me plait tout particulièrement: sobre, efficace. De plus il inclut tous les plugins nécessaires pour la gestion du markdown, référencés [ici](https://www.gatsbyjs.com/docs/how-to/routing/adding-markdown-pages/).
+
+ En plus Gatsby utilise graphQL et je voulais monter en compétences sur cette techno!
 
 ## Hosting : GitHub Pages / Github Actions
 
@@ -30,17 +35,17 @@ Un framework en particulier s'est dégagé et remplit tous ces critères (bien q
 
 Je souhaite un système de hosting simple, gratuit, et ci-possible qui fonctionne la plupart du temps! De plus, je souhaite publier ce site sur un nom de domaine spécifique, *effectivecoding.fr*.
 
-Pour cela, je trouve que github pages est parfait. De plus il est très largement utilisé, et on ne présente plus Github qui est le site de gestion de code le plus utilisé.
+Pour cela, je trouve que *Github pages* est parfait. De plus il est très largement utilisé, et on ne présente plus Github qui est le site de gestion de code le plus utilisé.
 
 Pour configurer un nom de domaine spécifique c'est très bien documenté [ici](https://docs.github.com/fr/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site) par exemple, et en francais. Il faudra vous connecter chez votre hébergeur chez qui vous avez souscrit votre nom de domaine, afin de configurer la redirection *votre nom de domaine* -> *Github pages*. Perso, je suis chez OVH, et la configuration se fait très simplement depuis le menu DNS (ajouter des enregistrements *A* et *CNAME* pour activer *www*, cf. documentation ci-dessus)
 
 ### Github Actions
 
 Pour publier le contenu du blog dans les *Github pages* il faut d'abord le "builder" via la commande *gatsby build*. Gatsby génera dans un répertoire *public* un fichier *index.html*, ainsi que tous les fichiers du blog (CSS, JS, Images etc.), et ce de manière minifiée.  
-C'est ce répertoire *public* qui doit être publiée, et non pas la racine de votre reporitory, qui contient les sources.
+C'est ce répertoire *public* qui doit être publiée, et non pas la racine de votre repository, qui contient les sources.
 Il faut donc recourir au *GitHub Actions*.
 
-Au moment d'activer les github pages (dans les *settings* de votre reprository), il faut donc indiquer dans *Build And Deployment* : *Github action*. Il faudra utiliser le workflow (correspondant au code de la github Action) proposé par Github nommé *Deploy Gatsby to Pages* , et que je vous mets ci-dessous. 
+Au moment d'activer les *Github pages* (dans les *settings* de votre repository), il faut donc indiquer dans me menu *Build And Deployment* l'option *Github action*. Il faudra utiliser un workflow spécifique (c'est à dire le code de la l'*Action*), proposé par Github nommé *Deploy Gatsby to Pages* , et que je vous mets ci-dessous. 
 
 Un fichier *gatsby.yml* sera crée par github dans le répertoire des actions (*.github/workflow*) : un simple *git pull* vous permettra de le récupérer.
 
@@ -149,3 +154,16 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 ```
+
+## Gestion de commentaires
+
+Afin d'avoir un blog plus intércatif, je souhaite que chacun puisse écrire des commentaires sur chaque post, ce système étant idéalement gratuit.
+Ici, le choix est plus simple car il n'y a pas tant de systèmes simples, avec possibilité de validation de messages (modération), et facilement intégré avec Gatsby : j'ai retenu [Disqus](https://disqus.com/). 
+[Un plugin Gatsby](https://www.gatsbyjs.com/plugins/gatsby-plugin-disqus/) est disponible, et c'est donc très facile d'intégrer Disqus à un blog.
+
+## Monitoring
+
+Je souhaite également monitorer mon blog, savoir qui visite, quand, d'où, etc. Ici, j'ai opté pour le très connu Google Analytics. Comme pour la gestion de commentaires,  un plugin Gastby existe [ici](https://www.gatsbyjs.com/plugins/gatsby-plugin-google-gtag/), et facilite grandement la mise en place : il suffit d'indiquer le *trackingID* de votre compte Google Analytics! A noter que pour obtenir au cas où vous l'avez oublié, il faut aller dans le menu "Flux de données" de Google Analytics.
+
+
+Voilà, c'est tout pour ce POST, n'hésitez pas à me laisser vos remarques grâce à Disqus, ci-dessous :) D'ici là portez-vous bien et à la prochaine!
