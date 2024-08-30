@@ -18,8 +18,8 @@ Nous allons découvrir dans ce POST la stack technique utilisée pour publier me
 ## Framework: Gatsby 
 
 Voici les critères sur lesquels je me suis basé pour sélectionner ce framework :
-- Un site "statique", génére par un SSG (consultez [ce très bon article](https://www.robinwieruch.de/web-applications/) qui explique l'historique de développement WEB, et les termes *SPA - Single Page Application*, *SSR - Server Side Rendering*, ou *SSG - Static Site Generator*), afin d'avoir un site rapide, et facile à deployer (par exemple dans *github pages* ou *gitlab pages*)
-- Ayant de l'expérience avec REACT, j'ai voulu utiliser ce framework afin d'êtrer rapidement opérationnel
+- Un site "statique", génére par un SSG (consultez [ce très bon article](https://www.robinwieruch.de/web-applications/) qui explique l'historique du développement WEB, et les termes *SPA - Single Page Application*, *SSR - Server Side Rendering*, ou *SSG - Static Site Generator*), afin d'avoir un site rapide, et facile à deployer (par exemple dans *github pages* ou *gitlab pages*)
+- Ayant de l'expérience avec REACT, j'ai voulu utiliser ce framework afin d'être rapidement opérationnel
 - Je souhaite que le framework soit performant pour afficher les pages très rapidement (avec un SSG justement, c'est normalement le cas :));
 - Pouvoir écrire mes posts en markdown (syntaxe très répandue) : il faut donc un mécanisme qui transforme le markdown en HTML;
 - Enfin un bon éco système de plugins, et une bonne documentation, car je souhaite ajouter des plugins dans le futur (Analyse de l'utilisation, Système commentaires, etc.)
