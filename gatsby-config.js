@@ -71,9 +71,9 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: `gatsby-plugin-google-gtag`,
       options: {
-        trackingId: "G-RLFBNY1D98",
+        trackingIds: ["G-RLFBNY1D98"],
       },
     },
     {
