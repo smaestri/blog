@@ -52,13 +52,10 @@ const Bio = () => {
           />
         )} */}
         {author?.name && (
-          /* <p>
+          <p>
             Ecrit par <strong>{author.name}</strong> {author?.summary || null}
             {` `}
           < br />
-          <p> */
-          <p>Vous voulez apprendre ou améliorer vos compétences avec Spring (Core, MVC, Data, Security) et React? <br />
-           <a href="https://www.udemy.com/course/developpeur-web-fullstack-avec-spring-et-react" target="_blank">Suivez ma formation sur Udemy</a> où nous apprendrons les fondamentaux et développerons ensemble une application pas à pas!
           </p>
         )}
 
