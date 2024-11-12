@@ -25,7 +25,7 @@ Je vous recommande en revanche, pour Java et Javascript les deux livres suivants
   <tr>
     <td width="123" valign="top">
       <h4>
-        Head first Java<a href="https://www.amazon.fr/gp/product/B009KCUX3S/ref=as_li_tl?ie=UTF8&camp=1642&creative=6746&creativeASIN=B009KCUX3S&linkCode=as2&tag=effectivecoding-21&linkId=265e8ab6f48e98e0eecd0bde75288c3a" target="_blank" rel="noopener noreferrer"><img src="//ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=FR&ASIN=B009KCUX3S&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=effectivecoding-21" border="0" /></a><img style="border: none !important; margin: 0px !important;" src="//ir-fr.amazon-adsystem.com/e/ir?t=effectivecoding-21&l=am2&o=8&a=B009KCUX3S" alt="" width="1" height="1" border="0" />
+        Head first Java<br/><img style="border: none !important; margin: 0px !important;" src="https://m.media-amazon.com/images/I/61F0oIyk8eS._SL1000_.jpg" alt="" width="150" height="150"  />
       </h4>
     </td>
     <td width="187" valign="top">
@@ -53,7 +53,7 @@ Une fois qu’on connait les bases de la programmation Java et Javascript, on va
   <tr>
     <td width="200" valign="top">
       <h4>
-        Head First Design Patterns<a href="https://www.amazon.fr/gp/product/B00AA36RZY/ref=as_li_tl?ie=UTF8&camp=1642&creative=6746&creativeASIN=B00AA36RZY&linkCode=as2&tag=effectivecoding-21&linkId=c87f174f372eb409bd2fcc90562ff260" target="_blank" rel="noopener noreferrer"><img src="//ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=FR&ASIN=B00AA36RZY&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=effectivecoding-21" border="0" /></a><img style="border: none !important; margin: 0px !important;" src="//ir-fr.amazon-adsystem.com/e/ir?t=effectivecoding-21&l=am2&o=8&a=B00AA36RZY" alt="" width="1" height="1" border="0" />
+        Head First Design Patterns<img style="border: none !important; margin: 0px !important;" src="https://m.media-amazon.com/images/I/61APhXCksuL._SX218_BO1,204,203,200_QL40_FMwebp_.jpg" alt="" width="150" height="150" />
       </h4>
     </td>
     <td width="200" valign="top">
@@ -63,7 +63,7 @@ Une fois qu’on connait les bases de la programmation Java et Javascript, on va
   <tr>
     <td width="200" valign="top">
       <h4>
-        Modern Java in action<a href="https://www.amazon.fr/gp/product/1617293563/ref=as_li_tl?ie=UTF8&camp=1642&creative=6746&creativeASIN=1617293563&linkCode=as2&tag=effectivecoding-21&linkId=e32ef5483fe5fb31b459866288d559c1" target="_blank" rel="noopener noreferrer"><img src="//ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=FR&ASIN=1617293563&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=effectivecoding-21" border="0" /></a><img style="border: none !important; margin: 0px !important;" src="//ir-fr.amazon-adsystem.com/e/ir?t=effectivecoding-21&l=am2&o=8&a=1617293563" alt="" width="1" height="1" border="0" />
+        Modern Java in action<br/><img style="border: none !important; margin: 0px !important;" src="https://m.media-amazon.com/images/I/417Eo-qTuYL._SX218_BO1,204,203,200_QL40_ML2_.jpg" alt="" width="150" height="150" border="0" />
       </h4>
     </td>
     <td width="200" valign="top">
@@ -73,7 +73,7 @@ Une fois qu’on connait les bases de la programmation Java et Javascript, on va
   <tr>
     <td width="200" valign="top">
       <h4>
-        Code Complete 2nd edition<a href="https://www.amazon.fr/gp/product/0735619670/ref=as_li_tl?ie=UTF8&camp=1642&creative=6746&creativeASIN=0735619670&linkCode=as2&tag=effectivecoding-21&linkId=87455aef89b5407b09fd206f2eb40f2f" target="_blank" rel="noopener noreferrer"><img src="//ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=FR&ASIN=0735619670&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=effectivecoding-21" border="0" /></a><img style="border: none !important; margin: 0px !important;" src="//ir-fr.amazon-adsystem.com/e/ir?t=effectivecoding-21&l=am2&o=8&a=0735619670" alt="" width="1" height="1" border="0" />
+        Code Complete 2nd edition<br/><img style="border: none !important; margin: 0px !important;" src="https://m.media-amazon.com/images/I/414E17giciL._SX218_BO1,204,203,200_QL40_ML2_.jpg" alt="" width="150" height="150" border="0" />
       </h4>
     </td>
     <td width="200" valign="top">
@@ -83,7 +83,8 @@ Une fois qu’on connait les bases de la programmation Java et Javascript, on va
   <tr>
     <td width="200" valign="top">
       <h4>
-        Agile software Development Principes Patterns and practices<a href="https://www.amazon.fr/gp/product/0135974445/ref=as_li_tl?ie=UTF8&camp=1642&creative=6746&creativeASIN=0135974445&linkCode=as2&tag=effectivecoding-21&linkId=032f170205220b0d8a17de7cc8170d2e" target="_blank" rel="noopener noreferrer"><img src="//ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=FR&ASIN=0135974445&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=effectivecoding-21" border="0" /></a><img style="border: none !important; margin: 0px !important;" src="//ir-fr.amazon-adsystem.com/e/ir?t=effectivecoding-21&l=am2&o=8&a=0135974445" alt="" width="1" height="1" border="0" />
+        Agile software Development Principes Patterns and practices<br /><img style="border: none !important; margin: 0px !important;" src="https://m.media-amazon.com/images/I/51yHf-4GaSL._SX218_BO1,204,203,200_QL40_FMwebp_.jpg
+        " alt="" width="150" height="150" border="0" />
       </h4>
     </td>
     <td width="200" valign="top">
@@ -105,7 +106,7 @@ C’est donc un rôle central et de nombreux livres plus spécifiquement traiten
         Microservices patterns
       </h4>
       <p>
-        <a href="https://www.amazon.fr/gp/product/1617294543/ref=as_li_tl?ie=UTF8&camp=1642&creative=6746&creativeASIN=1617294543&linkCode=as2&tag=effectivecoding-21&linkId=9c6ca854250c7bf573cc1f35efc2a906" target="_blank" rel="noopener noreferrer"><img src="//ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=FR&ASIN=1617294543&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=effectivecoding-21" border="0" /></a><img style="border: none !important; margin: 0px !important;" src="//ir-fr.amazon-adsystem.com/e/ir?t=effectivecoding-21&l=am2&o=8&a=1617294543" alt="" width="1" height="1" border="0" />
+        <img style="border: none !important; margin: 0px !important;" src="https://m.media-amazon.com/images/I/41lx6gQtsLL._SX218_BO1,204,203,200_QL40_FMwebp_.jpg" alt="" width="150" height="150" border="0" />
       </p>
     </td>
     <td width="200" valign="top">
@@ -119,7 +120,7 @@ C’est donc un rôle central et de nombreux livres plus spécifiquement traiten
         Domain-Driven Design: Tackling Complexity in the Heart of Software
       </h4>
       <p>
-        <a href="https://www.amazon.fr/gp/product/0321125215/ref=as_li_tl?ie=UTF8&camp=1642&creative=6746&creativeASIN=0321125215&linkCode=as2&tag=effectivecoding-21&linkId=6371c7495d1f9902f731e1f564f8098f" target="_blank" rel="noopener noreferrer"><img src="//ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=FR&ASIN=0321125215&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=effectivecoding-21" border="0" /></a><img style="border: none !important; margin: 0px !important;" src="//ir-fr.amazon-adsystem.com/e/ir?t=effectivecoding-21&l=am2&o=8&a=0321125215" alt="" width="1" height="1" border="0" />
+        <img style="border: none !important; margin: 0px !important;" src="https://m.media-amazon.com/images/I/41roGUf%2BcML._SY291_BO1,204,203,200_QL40_FMwebp_.jpg" alt="" width="150" height="150" border="0" />
       </p>
     </td>
     <td width="200" valign="top">
@@ -139,7 +140,7 @@ Je mets un derniers livre en bonus, car il ne s’agit pas réellement d'un livr
         Soft Skills
       </h4>
       <p>
-        <img class="alignnone size-full wp-image-280" src="http://www.effectivecoding.fr/wp-content/uploads/2020/05/spftskills.jpeg" alt="" width="220" height="276" />
+        <img class="alignnone size-full wp-image-280" src="https://m.media-amazon.com/images/I/41gZ1rA1jCL._SX218_BO1,204,203,200_QL40_FMwebp_.jpg" alt="" width="150" height="150" />
       </p>
     </td>
     <td width="200" valign="top">

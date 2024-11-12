@@ -15,7 +15,7 @@ Nous allons découvrir dans ce post 3 hooks permettant d'améliorer les performa
 
 Imaginons un cas très simple, où un composant `Parent` met à jour sont état via un `useState`. Si ce composant `Parent` possède des enfants `Child`, alors ceux-ci seront également rendus, même s'ils ne sont pas concernés pas la mise à jour de l'état (c'est à dire qu'aucune `props` de `Child` ne change).
 
-Pour tester simplement, on aura donc un componsant `Parent` avec un state, et un bouton de mise à jour de ce state :
+Pour tester simplement, on aura donc un composant `Parent` avec un state, et un bouton de mise à jour de ce state :
 ```javascript
 const [count, setCount] = useState(0)
 ...
@@ -102,7 +102,6 @@ Cette fois-ci, on ne va pas pas se baser sur le rendu des composants `Parent` et
 
 ```javascript
 const computedValue = () => {
-  console.log('compute value')
   let num=0;
   for (let i = 0; i < 1000000000; i++) {
     num += 1;
@@ -137,7 +136,6 @@ Il faut indiquer à React que, vu que la fonction ne dépend pas d'un `state`, n
 
 ```javascript
  const computedValue = useMemo(() => {
-    console.log('compute value')
     let num=0;
     for (let i = 0; i < 1000000000; i++) {
       num += 1;
@@ -153,10 +151,15 @@ Il faut aussi changer l'appel à `computedValue` suite à l'utilisation de `useM
 
 Et là bingo, on ne rentre plus dans la fonction `computedValue()` au click sur le bouton, et donc du changement de state de `count`! On a mis en place un cache pour cette fonction.
 
-J'espère que ces petis exemples vous autont familiarisé avec ces hooks fondamentaux de React.
+J'espère que ces petits exemples vous autont familiarisé avec ces hooks fondamentaux de React.
 Comme d'habitude le code est [ici](https://github.com/smaestri/blog-hook-react) sur mon Github. Changer le cas voulu dans `main.tsx`, puis lancer `npm i` et `npm run dev`.  
 
 Voici également un article qui m'a inspiré :
 https://kaushaldhakal40.medium.com/optimizing-react-performance-preventing-unnecessary-child-component-re-renders-17b421a6d39e#:~:text=The%20Solution%3A%20Memoization%20with%20React,change%2C%20effectively%20preventing%20unnecessary%20renders.
 
 Codez bien!
+
+Documentation:  
+memo: https://fr.react.dev/reference/react/memo  
+useCallback https://fr.react.dev/reference/react/useCallback  
+usememo: https://fr.react.dev/reference/react/useMemo

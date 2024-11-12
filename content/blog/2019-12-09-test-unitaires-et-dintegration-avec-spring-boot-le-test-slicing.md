@@ -31,10 +31,7 @@ Nous allons donc voir la technique de _test slicing_ au travers de 2 scénarios,
 
 ## Présentation de notre cas d'exemple
 
-Voici le schéma de l'application que nous allons mettre en place :<figure class="wp-block-image">
-
-<img src="https://www.effectivecoding.fr/wp-content/uploads/2019/12/springtest.png" alt="" class="wp-image-118" srcset="https://www.effectivecoding.fr/wp-content/uploads/2019/12/springtest.png 589w, https://www.effectivecoding.fr/wp-content/uploads/2019/12/springtest-300x92.png 300w" sizes="(max-width: 589px) 100vw, 589px" /> </figure> 
-
+Voici les éléments de l'application que nous allons mettre en place :
   * Un utilisateur authentifié et autorisé appelle un contrôleur REST (_/users/123_) afin d'obtenir l'adresse d'un autre utilisateur, dont l'identifiant est passé en paramètre. Ce _endpoint_ REST est sécurisé avec SPRING SECURITY : on doit fournir un login + mot de passe en _Basic Authentication (détail ci-après)._
   * On va utiliser Mongo pour la persistance. Nous souhaitons que l'utilisateur qui effectue la requête en _Basic Authentication_ soit inscrit dans la base Mongo (table UTILISATEUR). Pour cela, nous mettons en place une implémentation de [_UserDetailsService_][9] de Spring Security;
   * On va désactiver la gestion de session et la mise en place du JSESSIONID pour plus de simplicité via _.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)_
@@ -194,7 +191,7 @@ public class DB_Only_Test {
 
 ## Scénario 3 : Test d'intégration
 
-Pour ce dernier scénario plus complexe, nous allons mettre en place un vrai test d'intégration qui a toutes les briques de SPRING actives : SECURITY, DATA, WEB. Ceci est rendu possible grâce à l'annotation _@SpringBootTest q_ui va charger TOUT le contexte SPRING, comme en conditions réelles!
+Pour ce dernier scénario plus complexe, nous allons mettre en place un vrai test d'intégration qui a toutes les briques de SPRING actives : SECURITY, DATA, WEB. Ceci est rendu possible grâce à l'annotation `@SpringBootTest` qui va charger TOUT le contexte SPRING, comme en conditions réelles!
 
 Voici notre d'intégration :
 ```java

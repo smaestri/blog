@@ -91,7 +91,7 @@ Voyons si l'application du premier point corrige le problème.
 
 ### useCallback et memo
 
-Pour éviter qu'un componsant Child soit rendu quand son parent est rendu, on peut utiliser conjointement les hooks `useCallback` pour la fonction de callback `addSelectedItem`, et `memo()` pour le composant `Child`.
+Pour éviter qu'un composant Child soit rendu quand son parent est rendu, on peut utiliser conjointement les hooks `useCallback` pour la fonction de callback `addSelectedItem`, et `memo()` pour le composant `Child`.
 
 Déclarons `addSelectedItem` avec le hook `useCallback`, et un tableau de dépendance vides. Le reste est identique :
 
@@ -101,7 +101,7 @@ Déclarons `addSelectedItem` avec le hook `useCallback`, et un tableau de dépen
    }, [])
 ```
 
-Egalement, ajoutons le hook `memo()` au componsant `Child` :
+Egalement, ajoutons le hook `memo()` au composant `Child` :
 
 ```javascript
 export default memo(Child)
@@ -146,6 +146,10 @@ Afin de pallier au problème précédent, nous allons revoir la fonction `addSel
    }, [])
 ```
 
-Notez que nous avons bien remis le `useCallback` avec un tableau vide de dépendances, afin de ne pas rendre le composant `Child`!
+Notez que nous avons bien remis le `useCallback` avec un tableau vide de dépendances, afin de ne pas rendre le composant `Child`! De plus, nous avons mis toute le code dans un fonction callback de `setSelectedItems`, et non plus par valeur directement.
 
 Testons à nouveau: Bingo! Tout marche parfaitement à présent! Tout le code est visible dans [ce codesandbox](https://codesandbox.io/p/sandbox/k533gq) (il y a une petite icone pour afficher la console JS en haut à droite). Je vous dis à bientôt pour de nouvelles aventures du développement Web!
+
+Documentation:  
+memo: https://fr.react.dev/reference/react/memo  
+useCallback https://fr.react.dev/reference/react/useCallback

@@ -5,8 +5,10 @@ type: post
 date: 2020-12-10T14:51:26+00:00
 categories:
   - sonar, jest
-
 ---
+
+Avertissement! : Cet article étant à présent ancien,  il semble que les dernières versions de Jest gèrent directement les rapports Sonar, il n'est donc plus utile de recourir à une librairie tierce. Merci de vous référer à la documentation.
+
 [Sonar](https://docs.sonarqube.org/latest/) est un outil de test de la qualité de code. Il se base sur un ensemble de règles qui ont une sévérité : _code smell_, _bug_, _vulnerability_, _security hotspot_.
 Sonar permet aussi d'afficher les résultats de la couverture de code, c'est à dire le pourcentage de lignes de code qui est testée dans l'application. Il ne se charge cependant pas du calcul à proprement parler.
 

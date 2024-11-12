@@ -70,6 +70,7 @@ Une explication détaillée est présente sur ce superbe article (en anglais) : 
 
 
 ### *fetch-mock*
+Avertissement! Cet aticle étant ancien, il est préférable de ne pas mocker fetch, et utiliser [MSW](https://mswjs.io/) à la place.
 
 [*Fetch-Mock*](http://www.wheresrhys.co.uk/fetch-mock/) est une librairie qui va nous permettre de simplifier le fonctionnement ci-dessus. En effet, on va pouvoir définir le mapping entre URL et valeur de retour de la fonction `fetch` de manière plus simple qu'avec `mockImplementation`.
 

@@ -48,7 +48,7 @@ Et bien Ag-grid va faire tour ce boulot pour vous! En étudiant précisément [l
 Alors comment on fait?
 1. On va tout d'abord installer la librairie *ag-grid* via `npm install ag-grid-enterprise`(attention il faut bioen utiliser la version *enterprise* et non la version *community*. Heureusement si vous ne mettez pas en production votre projet, c'est OK pour tester gratuitement). Suivez également les instructions du Getting started [à cette adresse](https://www.ag-grid.com/javascript-data-grid/getting-started/);
 2. Installer le wrapper `AgGrid` pour React via `npm install` `ag-grid-react`
-3. Déclarer notre componsant *AgGrid* avec les paramètres requis pour faire de la pagination côté serveur, je vous laisse vous référer à la [documentation Ag-Grid](https://www.ag-grid.com/react-data-grid/server-side-model-pagination/) pour avoir l'explication détaillée des paramètres :
+3. Déclarer notre composant *AgGrid* avec les paramètres requis pour faire de la pagination côté serveur, je vous laisse vous référer à la [documentation Ag-Grid](https://www.ag-grid.com/react-data-grid/server-side-model-pagination/) pour avoir l'explication détaillée des paramètres :
 
 ```javascript
 import { AgGridReact } from 'ag-grid-react'

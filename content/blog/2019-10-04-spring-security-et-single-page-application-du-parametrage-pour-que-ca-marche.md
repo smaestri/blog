@@ -14,7 +14,7 @@ tags:
 
 ## Introduction
 
-*Spring Security *est un framework qui permet l’authentification des utilisateurs, et de vérifier s'ils sont bien autorisés à accéder aux ressources voulues.  
+*Spring Security* est un framework qui permet l’authentification des utilisateurs, et de vérifier s'ils sont bien autorisés à accéder aux ressources demandées.  
 On va constater dans cet article qu'il est nécessaire de paramétrer *Spring Security* afin de le faire fonctionner convenablement avec une *Single Page Application* (*Angular* ici).
 
 ## Appel au service built-in Login
