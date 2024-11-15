@@ -7,7 +7,7 @@ module.exports = {
     title: `Effective Coding`,
     author: {
       name: `Sylvain Maestri`,
-      summary: `, développeur WEB fullstack avec 15 années d'expérience, où j'ai fait pas mal de Java / Spring pour le backend et du Javascript / React pour le frontend. Je vous relate donc quelques trucs appris au fil de ces années, ça vous servira surement :).`,
+      summary: `, développeur WEB fullstack avec 15 années d'expérience, en environnement Java / Spring pour le backend et Javascript / React pour le frontend. Je relate donc dans ce blog quelques trucs appris au fil de ces années, ça servira surement :).`,
     },
     description: `Développement Web fullstask avec Java et Javascript`,
     siteUrl: `https://gatsby-starter-blog-demo.netlify.app/`,
