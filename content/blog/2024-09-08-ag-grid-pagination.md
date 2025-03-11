@@ -35,7 +35,7 @@ Par exemple, prenons [l'API Pokemon](https://pokeapi.co/docs/v2#berries-section)
 
 
 Si on souhaite afficher le résultat d'une API paginée dans un joli tableau, avec des boutons "précédent" et "suivant" pour parcourir la liste des Berries par exemple, les choses peuvent vite devenir compliquées si on fait tout à la main:  
-- Appel manuel à l'API via `fetch` ou une lib tipe `Axios` sur un nombre d'éléments;
+- Appel manuel à l'API via `fetch` ou une librairie type [`Axios`](https://axios-http.com/fr/docs/intro) sur un nombre d'éléments;
 - Parcourir les résultats et afficher les lignes du tableau
 - Création de bouton de navigation "Précédent" et "suivant", ainsi que "première page" et "dernière page"
 - et j'en passe!
