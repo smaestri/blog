@@ -49,9 +49,9 @@ Une  fonctionnalité intéressant de storybook via le plugin `autodoc` : nous  g
 Voilà, pour la présentation de Storybook ! Maintenant il reste à publier ce composant `Button` dans un registre NPM pour le réutiliser. C'est ce que nous allons voir dans cette partie.
 
 ## Publicaton de la bibiliothèque - 1ère approche avec Vite, Rollup et NPM
-Pour commencer, nous allons tenter de déployer notre composant `Button` uniqument via NPM et VITE. Bien entendu, nous souhaitons publier notre composant React uniquement (ici `Buttons.tsx`) et non les stories associées (`Button.stories.tsx`) qui sont uniquement voués à être utilisées pendant la phase de développement, ou pour exposer les composants sur un serveur via StoryBook.
+Pour commencer, nous allons tenter de déployer notre composant `Button` uniquement via NPM et VITE. Bien entendu, nous souhaitons publier notre composant React uniquement (ici `Buttons.tsx`) et non les stories associées (`Button.stories.tsx`) qui sont uniquement voués à être utilisées pendant la phase de développement, ou pour exposer les composants sur un serveur via StoryBook.
 
-On peut séparer le process de publication en deux phases : le build avec VITE, et le déploiement avec NPM.
+On peut séparer le process de publication en deux phases : le build avec Vite, et le déploiement avec NPM.
 
 ### Configuration de Vite pour le build
 Vite nous permet, grâce à son [mode "Librairie"](https://vite.dev/guide/build), de pouvoir exporter des composants afin de les réutiliser dans une autre application (en les installant avec `npm install <nom de la librairie>` dans l'application cible). Il est important de noter que ce process va transformer nos fichiers TYPESCRIPT et JAVASCRIPT pour être réutilisables pour une application qui n'utiliserait pas Javascript; de plus les fichiers seront minifiés. Enfin, ce n'est pas Vite directement qui effectue le build, mais Vite utilise [Rollup](https://rollupjs.org/configuration-options/) pour cela, une autre librairie sépocialisée dans le build JS.  
@@ -107,13 +107,13 @@ Nous allons intégrer la librairie dans un projet afin d'utiliser les composants
 Pour ce faire, initialisons un nouveau projet avec Vite : `npm create vite@latest`, choisissez à nouveau React et Typescript, puis installez le projet avec ``npm install``. Nous l'appelerons ce projet  le projet "client" dans la suite de l'article, car c'est lui qui utilisera notre bibliothèqe de composants Rect partagés.
 
 ### Tester l'intégration en local
-Plutot que de tester l'intégration directement depuis le reposiroty Nexus (nous le ferons plus tard, ne vous inquiétez pas), nous allons tester l'intégration en local. Pour cela, il existe une commande bien pratique, ``npm run pack``.
+Plutot que de tester l'intégration directement depuis le repository Nexus (nous le ferons plus tard, ne vous inquiétez pas), nous allons tester l'intégration en local. Pour cela, il existe une commande bien pratique, ``npm pack``.
 
 - Tout d'abord, à la racine du projet bibilothèque, on builde le projet comme vu précédemment via `npm run build`
-- Ensuite, on exporte tous les fichiers transpilés dans un seul et même gros fichier ``.tar.gz``, via `npm  pack`
-Notez que optionnellement, vous pouvez modifier la version de votre bibiiothèque via la commande `npm version <type>`, où `type` respecte la convention semver, soit `patch, minor ou major`. Et là, on tire un tout autre sujet sur la gestion des versions dans NPM qui est hors scope, mais je vous renvois à [cet article](https://www.younup.fr/blog/petit-rappel-du-semver-avec-npm) qui explique cela.
+- Ensuite, on exporte tous les fichiers transpilés dans un seul et même gros fichier ``.tar.gz``, via `npm pack`
+Notez que optionnellement, vous pouvez modifier la version de votre bibliothèque via la commande `npm version <type>`, où `type` respecte la convention semver, soit `patch, minor ou major`. Et là, on tire un tout autre sujet sur la gestion des versions dans NPM qui est hors scope, mais je vous renvois à [cet article](https://www.younup.fr/blog/petit-rappel-du-semver-avec-npm) qui explique cela.
 
-Ensuite, dans le projet client, nous allons installer nos composants React avec la commande `npm install <lien vers le fichier tar gz>`.
+Ensuite, dans le projet client, nous allons installer notre composants React `Button` avec la commande `npm install <lien vers le fichier tar gz>`.
 
 Dans le fichier racine `App.tsx`, nous allons importer le composant  React `Button`, via :  
 `import {Button} from "my-react-components"`
@@ -127,14 +127,14 @@ return(
 ### Petit soucis de type
 Normalement à ce stade, vous aurez une erreur qui s'affiche `Could not find a declaration file for module <your-module> [...] Try npm i --save-dev @types/vite-project or add a new declaration (.d.ts) file containing declare module '<your module>'`
 
-Pour corriger ce problème, faites comme le message l'indique et créer ce fichier ``.d.ts`` avec le contenu indiqué; il semble que Vite par défaut n'exporte pas les Types Typescript des composants React à exporter. Nous verrons dans la deuxième partie que Lerna corrige ce problème, et nous n'aurons plsu besoin de créer ces fichier ``.d.ts`` additionnels.
+Pour corriger ce problème, faites comme le message l'indique et créer ce fichier ``.d.ts`` avec le contenu indiqué; il semble que Vite par défaut n'exporte pas les Types Typescript des composants React à exporter. Nous verrons dans la deuxième partie que Lerna corrige ce problème, et nous n'aurons plus besoin de créer ces fichier ``.d.ts`` additionnels.
 
 Une fois que vous avez créer ce fichier, vous n'aurez plus d'erreur. Lancez le projet client via `npm run dev ` et bingo, vous voyez votre magnifique bouton avec le texte "test" s'afficher sur fond vert.
 
 ### Publication dans le registre NPM
 Nous avons réussi à 1/ crée notre bibliothèque et surtout 2/ l'utilisé dans un projet client en local, mais comment la publier dans le registre NPM, pour que tout le monde en bénéficie?
 
-Si vous etes en entreprise, il est fort probable que vous avez un registre interne à votre entreprise, non public et donc non publié sur Internet. Dans ce cas de figure, il faut se référer à la [documentation NPM sur les organisations](https://docs.npmjs.com/organizations), et c'est payant. Par simplicité, nous allons dans cet article publier sur le repo public NPM, gratuit qui plus est. Voici la démarche :
+Si vous êtes en entreprise, il est fort probable que vous avez un registre interne à votre entreprise, non public et donc non publié sur Internet. Dans ce cas de figure, il faut se référer à la [documentation NPM sur les organisations](https://docs.npmjs.com/organizations), et c'est payant. Par simplicité, nous allons dans cet article publier sur le repo public NPM, gratuit qui plus est. Voici la démarche :
 
 - Créer un compte NPM sur le [site Internet npm](https://www.npmjs.com/)
 - Se connecter au compte NPM depuis votre oridnateur via la commande `npm login`
@@ -162,9 +162,9 @@ en ``import {Button} from "my-shared-react-components"``
 - Lancez ``npm run dev`` : bingo! Vous devriez voir votre bouton, cette fois importé depuis le registre NPM Internet!
 
  ### Deux soucis majeurs avec le process actuel
- Nous avons réussi précédemment à publier des composants React dans le registre NPM afin d'êtrez réutilisé dans des apps clientes, c'est déja un super but!
+ Nous avons réussi précédemment à publier des composants React dans le registre NPM afin d'êtrez réutilisé dans des apps clientes, c'est déja super!
  Il y a cepdendant au moins deux gros problèmes :
- - nous avons du déclarer un fichier `module.d.ts` avec le process de build actuel via Vite / Rollup; c'est vraiment embêtant de devoir créer ces fichiers qui polluent notre base de code!
+ - nous avons du déclarer un fichier `module.d.ts` avec le process de build actuel via Vite / Rollup; c'est vraiment embêtant de devoir créer ces fichiers qui polluent notre base de code côté client!
  - et aussi un autre gros inconvénient et que TOUS les composants React sont publiés dans LE MEME package (ici `my-shared-react-components`). Du coup, il n'est pas possible d'avoir un compisant en `V1`, et un autre composant en `V2`, car ils sont issus du même package "englobant", avec une version figée!
 
 

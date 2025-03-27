@@ -9,7 +9,7 @@ categories:
 
 ---
 
-C'est la suite de l'arrticle sur la mise en place d'uen bibilothèque de composants React réutilisables. Merci de consulter [la première partie](http://effectivecoding.fr/2025-03-09-Bibliotheque-React-part1/) si ce n'est aps déjà fait.
+C'est la suite de l'arrticle sur la mise en place d'une bibilothèque de composants React réutilisables. Merci de consulter [la première partie](http://effectivecoding.fr/2025-03-09-Bibliotheque-React-part1/) si ce n'est pas déjà fait.
 
  ## Mise en place de Lerna
  [Lerna](https://lerna.js.org/) est un outil permettant de gérer de multiples sous-projets au sein d'un même repository.
@@ -19,7 +19,7 @@ C'est la suite de l'arrticle sur la mise en place d'uen bibilothèque de composa
  ### Intialisation de Lerna et la notion de workspaces
  Si on esaye d'installer Lerna directement via `npx lerna init`, on aura un message intéressant, indiquant d'utiliser les workspaces NPM.
 
- Les [workspaces NPM](https://docs.npmjs.com/cli/v7/using-npm/workspaces) permettent de gérer justement les cas où on a un projet "root" avec des sous-projets; ici, tous nos sous projets seront les composants React à publier, et le projet "root", ce sera notre storbook qui permettra de démontrer tous nos composants React.
+ Les [workspaces NPM](https://docs.npmjs.com/cli/v7/using-npm/workspaces) permettent de gérer justement les cas où on a un projet "root" avec des sous-projets; ici, tous nos sous projets seront les composants React à publier, et le projet "root", ce sera notre storybook qui permettra de montrer tous nos composants React dans une UI attractive.
 
  La première choise à faire est donc de définir notre workspace. Dans le `package.json`, indiquez :
 
@@ -55,7 +55,7 @@ Egalement, l'intialisation de Lerna a crée un fichier `lerna.json` qui est le f
   "description": "",
 }
 ```
-Pour chaque composant React, il faudra indiquer à Vite comment builder le composant, c'est à dire lui spécifie un point d'entré (`entry`), un nom de composant (`name`), un nom de fichier à générer (`filename`); dans les `rollUptions`, il faudra exclure `react` et `react-dom` comme expliqué dans la partie 1/. le fichier `vite.config.ts` du composant `Button` ressemblera donc à :
+Pour chaque composant React, il faudra indiquer à Vite comment builder le composant, c'est à dire lui spécifie un point d'entré (`entry`), un nom de composant (`name`), un nom de fichier à générer (`filename`); dans les `rollUptions`, il faudra exclure `react` et `react-dom` comme expliqué dans la partie 1/. Le fichier `vite.config.ts` du composant `Button` ressemblera donc à :
 
 ```javascript
 import { defineConfig } from 'vite'
@@ -97,7 +97,7 @@ export default defineConfig({
 ```
 
 #### Configuration du package.json
-Le `package.json `du `root` est grandement simplifié car on n'utilise plus le process de publication NPM et de build, mais Lerna à la place, qui se charge de tout ça. En fait, Lerna appellera la commande voulue dans tous les sous-projets (nos composants React); Ainsi `lerna run build` lancera tous les scripts `build` de chaque sous-projet. Enfin, nous indiquons le script `lerna publish minor`, ce qui va permettre de publier une version mineure de notre lib dans le registre NPM (vous pouvez paramétrer tout cela bien entrendu, je vous laisse vous référez à la documentation lerna). Lerna va également nous incrémenter la version dans les `package.json` suite à une publication en succès.
+Le `package.json `du `root` est grandement simplifié car on n'utilise plus le process de publication NPM et de build, mais Lerna à la place, qui se charge de tout ça. En fait, Lerna appellera la commande voulue dans tous les sous-projets (nos composants React); Ainsi `lerna run build` lancera tous les scripts `build` de chaque sous-projet. Enfin, nous indiquons le script `lerna publish minor`, ce qui va permettre de publier une version mineure de notre lib dans le registre NPM (vous pouvez paramétrer tout cela bien entrendu, je vous laisse vous référez à la documentation Lerna). Lerna va également nous incrémenter la version dans les `package.json` suite à une publication en succès, pensez à faire un `git pull`!.
 
 Voici la section `build` du fichier `package.json` du `root`:
 
@@ -113,15 +113,29 @@ Voici la section `build` du fichier `package.json` du `root`:
   }
   ```
 
-### Publier dans NPM
+#### Mise à joru de storybook
+
+Tous vos fichier stories sont maitenant dans un répertorie packages. Or par défaut, storybook configure le répertoire `src` poru aller chercher les stories, il faut modifier cela. Dans le fichier `.storybook/main`, indiquez :
+
+```json
+  "stories": [
+    "../packages/**/*.mdx",
+    "../packages/**/*.stories.@(js|jsx|mjs|ts|tsx)"
+  ],
+```
+
+Vous pouvez lancer Storybook via `npm run storybook` afin de vérifier que tout est OK, et que voyez bien le composant `Button` dans le menu de gauche.
+
+## Publier dans NPM
 - Comme dans la première partie, il faut créer un utilisateur NPM et se connecter via `npm adduser`.
 - lancer `npm publish`, ce qui va lancer `lerna publish minor`
 - Attention! Si vous recevez une erreur 403, cela peut vouloir dire que le nom de votre package déclaré dans la propiété `name` du `package.json` (celui de `Button`, pas celui du `root` qui est `private` pour rappel, on ne le publie pas) est déjà utilisé! Dans ce cas, changez de nom et prenez un qui n'existe pas, et relancez `npm publish`
 
+
 ## Conclusion
 
-Et voilà, on a crée une bibilothèque de composants React communs, publéie dans un registre NPM. Bien entendu pous pouvez vous référer à mon github poru avoir tout le code :
-- Le projet bibilothèque https://github.com/smaestri/my-lerna-react-components
-Vous pouvez voir le commit pour la transition vers Lerna depuis le process "classique" de la partie 1
-- Le projet client https://github.com/smaestri/client-shared-components
+Et voilà, on a crée une bibilothèque de composants React communs, publié dans un registre NPM. Bien entendu pous pouvez vous référer à mon Github poru avoir tout le code :
+- Le projet "bibilothèque" https://github.com/smaestri/my-lerna-react-components
+- Le projet "client" https://github.com/smaestri/client-shared-components
+- Les packages NPM sont publiés dans le registre, sur mon profile, à [cette URL](https://www.npmjs.com/settings/smaestri/packages).`my-shared-react-components` correspond au package global de la première partie, et `my-lerna-button` le package du `Button` publié avec Lerna, de la deuxième partie.
 J'ai mis l'import avec et sans Lerna
