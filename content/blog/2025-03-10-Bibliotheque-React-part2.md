@@ -113,9 +113,9 @@ Voici la section `build` du fichier `package.json` du `root`:
   }
   ```
 
-#### Mise à joru de storybook
+#### Mise à jour de storybook
 
-Tous vos fichier stories sont maitenant dans un répertorie packages. Or par défaut, storybook configure le répertoire `src` poru aller chercher les stories, il faut modifier cela. Dans le fichier `.storybook/main`, indiquez :
+Tous vos fichier stories sont maitenant dans un répertorie `packages`. Or par défaut, Storybook configure le répertoire `src` poru aller chercher les stories, il faut donc modifier cela. Dans le fichier `.storybook/main`, indiquez :
 
 ```json
   "stories": [
@@ -131,6 +131,7 @@ Vous pouvez lancer Storybook via `npm run storybook` afin de vérifier que tout 
 - lancer `npm publish`, ce qui va lancer `lerna publish minor`
 - Attention! Si vous recevez une erreur 403, cela peut vouloir dire que le nom de votre package déclaré dans la propiété `name` du `package.json` (celui de `Button`, pas celui du `root` qui est `private` pour rappel, on ne le publie pas) est déjà utilisé! Dans ce cas, changez de nom et prenez un qui n'existe pas, et relancez `npm publish`
 
+Installez la librairie dans votre client via `npm install <votre package>` comme expliqué dans la première partie, vous devriez voir votre composant! De plus, pas besoin de fichier additionnel `.d.ts`, cela fonctionnera directement : les `props` de votre composant React vous seront directement proposées dans votre IDE!
 
 ## Conclusion
 
