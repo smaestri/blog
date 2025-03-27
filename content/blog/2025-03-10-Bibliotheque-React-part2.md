@@ -135,7 +135,6 @@ Vous pouvez lancer Storybook via `npm run storybook` afin de vérifier que tout 
 ## Conclusion
 
 Et voilà, on a crée une bibilothèque de composants React communs, publié dans un registre NPM. Bien entendu pous pouvez vous référer à mon Github poru avoir tout le code :
-- Le projet "bibilothèque" https://github.com/smaestri/my-lerna-react-components
-- Le projet "client" https://github.com/smaestri/client-shared-components
-- Les packages NPM sont publiés dans le registre, sur mon profile, à [cette URL](https://www.npmjs.com/settings/smaestri/packages).`my-shared-react-components` correspond au package global de la première partie, et `my-lerna-button` le package du `Button` publié avec Lerna, de la deuxième partie.
-J'ai mis l'import avec et sans Lerna
+- Le projet "bibilothèque" : https://github.com/smaestri/my-lerna-react-components, il est également déployé via une Github action dans Github pages [ici](https://smaestri.github.io/my-lerna-react-components/)
+- Les packages NPM sont publiés dans le registre public, visibles sur mon profile, à [cette URL](https://www.npmjs.com/settings/smaestri/packages).`my-shared-react-components` correspond au package global de la première partie, et `my-lerna-button` le package du `Button` publié avec Lerna, de la deuxième partie.
+- Le projet "client" : https://github.com/smaestri/client-react-components. Vous pouvez voir dans le fichier `App.tsx` que j'ai importé les deux `Boutons` avec les deux différents packages. Bien entendu, si vous utilisez l'import sans Lerna, il faudra utiliser le fichier additonnel `module.d.ts` pour ne pas avoir d'erreur de type.
