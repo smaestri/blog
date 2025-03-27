@@ -135,7 +135,7 @@ Installez la librairie dans votre client via `npm install <votre package>` comme
 
 ## Conclusion
 
-Et voilà, on a crée une bibilothèque de composants React communs, publié dans un registre NPM. De plus, on a publié ces composants dans un Storbook, qui peut être partageable, afin de montrer à votre organisation l'ensemble de vos composants graphiques.  
+Et voilà, on a crée une bibilothèque de composants React communs, publié dans un registre NPM. De plus, on a publié ces composants grâce à Storbook, qui peut être partageable, afin de montrer à votre organisation l'ensemble de vos composants graphiques! 
 Bien entendu vous pouvez vous référer à mon Github pour avoir tout le code :
 - Le projet "bibilothèque" : https://github.com/smaestri/my-lerna-react-components, il est également déployé via une Github action dans Github pages [ici](https://smaestri.github.io/my-lerna-react-components/)
 - Les packages NPM sont publiés dans le registre public, visibles sur mon profile, à [cette URL](https://www.npmjs.com/settings/smaestri/packages).`my-shared-react-components` correspond au package global de la première partie, et `my-lerna-button` le package du `Button` publié avec Lerna, de la deuxième partie.
